@@ -61,7 +61,7 @@ router.delete("/delete-book", authenticateToken, async (req, res) => {
   }
 });
 
-// get all books
+// get all books - public
 router.get("/get-all-books", async (req, res) => {
   try {
     const books = await Book.find().sort({ createdAt: -1 });
@@ -72,7 +72,7 @@ router.get("/get-all-books", async (req, res) => {
   }
 });
 
-// get recently added books , limit 4
+// get recently added books , limit 4 - public
 router.get("/get-recent-books", async (req, res) => {
   try {
     const books = await Book.find().sort({ createdAt: -1 }).limit(4);
@@ -83,7 +83,7 @@ router.get("/get-recent-books", async (req, res) => {
   }
 });
 
-// get book by id
+// get book by id - public
 router.get("/get-book-by-id/:id", async (req, res) => {
   try {
     const { id } = req.params;
