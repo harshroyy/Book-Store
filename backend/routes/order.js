@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const { authenticateToken } = require("./userAuth");
-const Books = require("./models/book");
-const Order = require("./models/order");
-const User = require("./routes/user");
+const Books = require("../models/book");
+const Order = require("../models/order");
+const User = require("../routes/user");
 
 // place order
 router.post("/place order", authenticateToken, async (req, res) => {
