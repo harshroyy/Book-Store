@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGripLines } from "react-icons/fa";
+import './Navbar.css';
+
 
 function Navbar() {
   const links = [
@@ -70,8 +72,10 @@ function Navbar() {
           </button>
         </div>
       </nav>
+      
       <div
-        className={`${MobileNav} bg-zinc-800 h-screen absolute top-0 left-0 w-full z-40 flex flex-col items-center justify-center`}
+        className={`${MobileNav}  text-white glass absolute top-0 left-0 w-full z-40 flex flex-col items-center justify-center`}  
+        style={{ height: "100vh", width: "100vw" }}
       >
         {links.map((items, i) => (
           <Link
@@ -89,13 +93,13 @@ function Navbar() {
         ))}
         <Link
           to="/Login"
-          className={`${MobileNav}px-8 text-white text-3xl mb-8 py-2 font-thin border border-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
+          className={`${MobileNav}px-8 pl-3 pr-3 text-white text-4xl mb-8 py-2 font-thin  border border-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
         >
           Login
         </Link>
         <Link
           to="/SignUp"
-          className={`${MobileNav}px-8 py-2 mb-8 text-3xl text-white font-thin bg-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
+          className={`${MobileNav}px-8 py-2 mb-8 pl-3 pr-3 text-4xl text-white font-thin bg-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
         >
           SignUp
         </Link>
@@ -105,3 +109,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
