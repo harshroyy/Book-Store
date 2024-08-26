@@ -2,11 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BookCard = ({ data }) => {
-  console.log(data);
   return (
     <>
-      <Link>
-        <div className="bg-zinc-800 rounded p-4 flex flex-col">
+      <Link to={`/view-book-details/${data._id}`}>
+        <div className="bg-zinc-800 rounded p-4 flex flex-col transform transition-transform duration-300 ease-out hover:scale-105">
         <div
             className="bg-red-950 rounded flex items-center justify-center"
             style={{

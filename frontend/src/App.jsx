@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";    
 import Login from "./pages/Login";  
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ViewBookDetails from "./components/ViewBookDetails/ViewBookDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
            <Route path="/profile" element={<Profile/>}/>
            <Route path="/SignUp" element={<SignUp/>}/>
            <Route path="/Login" element={<Login/>}/>
+           <Route path="view-book-details/:id" element={<ViewBookDetails/>}></Route>
         </Routes>
         <Footer/>
       </Router>
