@@ -7,13 +7,12 @@ import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";    
 import Login from "./pages/Login";  
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {Routes, Route } from "react-router-dom";
 import ViewBookDetails from "./components/ViewBookDetails/ViewBookDetails";
 
 function App() {
   return (
     <div>
-      <Router>
         <Navbar/>
         <Routes>
            <Route exact path="/" element={<Home/>}/>
@@ -25,7 +24,6 @@ function App() {
            <Route path="view-book-details/:id" element={<ViewBookDetails/>}></Route>
         </Routes>
         <Footer/>
-      </Router>
     </div>
   );
 }
