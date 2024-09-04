@@ -23,7 +23,7 @@ const user = new mongoose.Schema(
     avatar: {
       type: String,
       default:
-        "https://cdn.pixabay.com/photo/2017/03/21/13/27/evil-2162179_640.png",
+        "https://i.pinimg.com/originals/73/c3/50/73c35097071e55014cffc83b72f85ea3.png",
     },
     role: {
       type: String,

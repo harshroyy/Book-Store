@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGripLines } from "react-icons/fa";
-import './Navbar.css';
-
+import { useSelector } from "react-redux";
+import "./Navbar.css";
 
 function Navbar() {
   const links = [
@@ -24,6 +24,12 @@ function Navbar() {
     },
   ];
 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  if (isLoggedIn === false) {
+    links.splice(2, 2);
+  }
+
   const [MobileNav, setMobileNav] = useState("hidden");
 
   return (
@@ -35,31 +41,45 @@ function Navbar() {
         </Link>
 
         <div className="nav-links-hellscript block md:flex items-center gap-4">
-          <div className="hidden md:flex font-thin gap-4">
+          <div className="hidden md:flex items-center gap-4 font-thin">
             {links.map((items, i) => (
-              <Link
-                to={items.link}
-                className="hover:text-red-600 transition-all duration-300"
-                key={i}
-              >
-                {items.title}
-              </Link>
+              <div className="flex items-center">
+                {items.title === "Profile" ? (
+                  <Link
+                    to={items.link}
+                    className="px-4 py-1 font-thin border border-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
+                    key={i}
+                  >
+                    {items.title}
+                  </Link>
+                ) : (
+                  <Link
+                    to={items.link}
+                    className="hover:text-red-600 transition-all duration-300"
+                    key={i}
+                  >
+                    {items.title}
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
-          <div className="hidden md:flex gap-4">
-            <Link
-              to="/Login"
-              className="px-4 py-1 font-thin border border-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
-            >
-              Login
-            </Link>
-            <Link
-              to="/SignUp"
-              className="px-4 py-1 font-thin bg-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
-            >
-              SignUp
-            </Link>
-          </div>
+          {isLoggedIn === false && (
+            <div className="hidden md:flex gap-4">
+              <Link
+                to="/Login"
+                className="px-4 py-1 font-thin border border-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
+              >
+                Login
+              </Link>
+              <Link
+                to="/SignUp"
+                className="px-4 py-1 font-thin bg-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
+              >
+                SignUp
+              </Link>
+            </div>
+          )}
           <button
             className="block md:hidden text-white text-2xl hover:text-red-500 "
             onClick={() =>
@@ -72,9 +92,9 @@ function Navbar() {
           </button>
         </div>
       </nav>
-      
+
       <div
-        className={`${MobileNav}  text-white glass absolute top-0 left-0 w-full z-40 flex flex-col items-center justify-center`}  
+        className={`${MobileNav}  text-white glass absolute top-0 left-0 w-full z-40 flex flex-col items-center justify-center`}
         style={{ height: "100vh", width: "100vw" }}
       >
         {links.map((items, i) => (
@@ -91,23 +111,26 @@ function Navbar() {
             {items.title}
           </Link>
         ))}
-        <Link
-          to="/Login"
-          className={`${MobileNav}px-8 pl-3 pr-3 text-white text-4xl mb-8 py-2 font-thin  border border-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
-        >
-          Login
-        </Link>
-        <Link
-          to="/SignUp"
-          className={`${MobileNav}px-8 py-2 mb-8 pl-3 pr-3 text-4xl text-white font-thin bg-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
-        >
-          SignUp
-        </Link>
+
+        {isLoggedIn === false && (
+          <>
+            <Link
+              to="/Login"
+              className={`${MobileNav}px-8 pl-3 pr-3 text-white text-4xl mb-8 py-2 font-thin  border border-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
+            >
+              Login
+            </Link>
+            <Link
+              to="/SignUp"
+              className={`${MobileNav}px-8 py-2 mb-8 pl-3 pr-3 text-4xl text-white font-thin bg-red-600 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300`}
+            >
+              SignUp
+            </Link>
+          </>
+        )}
       </div>
     </>
   );
 }
 
 export default Navbar;
-
-

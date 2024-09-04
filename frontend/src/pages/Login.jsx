@@ -1,7 +1,45 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate import
+import { authActions } from "../store/auth";
+import axios from "axios"; // Added axios import
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const [Values, setValues] = useState({
+    username: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const change = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...Values, [name]: value });
+  };
+
+  const submit = async () => {
+    try {
+      if (
+        Values.username === "" ||
+        Values.password === "" 
+      ) {
+        alert("All fields are required");
+      } else {
+        const response = await axios.post(
+          "http://localhost:1000/api/v1/sign-in", 
+          Values
+        );
+        dispatch(authActions.login());
+        dispatch(authActions.changeRole(response.data.role));
+        localStorage.setItem("id", response.data.id);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", response.data.role);
+        navigate("/profile")
+      }
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+
   return (
     <div className='h-screen bg-gradient-to-b from-zinc-900 to-red-700 flex items-center justify-center'>
       <div className="bg-zinc-800/80 rounded-lg px-8 py-10 w-full md:w-3/6 lg:w-1/3 border border-transparent">
@@ -18,6 +56,8 @@ const Login = () => {
                 placeholder='username'
                 name="username"
                 required
+                value={Values.username}
+                onChange={change}
             />
           </div>
           <div className='mt-4'>
@@ -31,6 +71,8 @@ const Login = () => {
                 placeholder='password'
                 name="password"
                 required
+                value={Values.password}
+                onChange={change}
             />
           </div>
           <div className='flex justify-between items-center mt-4'>
@@ -43,7 +85,8 @@ const Login = () => {
             </Link>
           </div>
           <div className='mt-6'>
-            <button className='w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-all duration-200 ease-in-out'>
+            <button className='w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-all duration-200 ease-in-out'
+            onClick={submit}>
               Login
             </button>
           </div>
