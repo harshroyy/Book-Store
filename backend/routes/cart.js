@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/user");
+const Book = require("../models/book"); // Adjust the path as necessary
+const Order = require("../models/order"); // Adjust the path as necessary
 const { authenticateToken } = require("./userAuth");
 
 // add to cart

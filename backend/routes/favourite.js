@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/user");
+const Book = require("../models/book"); // Adjust the path as necessary
+const Order = require("../models/order"); // Adjust the path as necessary
 const { authenticateToken } = require("./userAuth");
 
 // add book to favourite
@@ -39,8 +41,16 @@ router.put("/remove-book-from-favourite/",authenticateToken,async (req, res) => 
 // get favourite books of a particular user
 router.get("/get-favourite-books/", authenticateToken, async (req, res) => {
   try {
-    const { id } = req.headers;
+    const { id } = req.headers; 
+    if (!id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
     const userData = await User.findById(id).populate("favourites");
+    if (!userData) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const favouriteBooks = userData.favourites;
 
     return res.json({
@@ -48,8 +58,11 @@ router.get("/get-favourite-books/", authenticateToken, async (req, res) => {
       data: favouriteBooks,
     });
   } catch (error) {
+    console.error('Error in /get-favourite-books route:', error); // Detailed logging
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+
 
 module.exports = router;

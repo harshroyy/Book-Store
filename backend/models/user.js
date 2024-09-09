@@ -33,23 +33,23 @@ const user = new mongoose.Schema(
     favourites: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "books",
+        ref: "Book",
       },
     ],
     cart: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "books",
+        ref: "Book",
       },
     ],
     orders: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "order",
+        ref: "Order",
       },
     ],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("user", user);
+module.exports = mongoose.model("User", user);

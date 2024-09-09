@@ -5,7 +5,7 @@ const Order = require("../models/order");
 const User = require("../routes/user");
 
 // place order
-router.post("/place order", authenticateToken, async (req, res) => {
+router.post("/place-order", authenticateToken, async (req, res) => {
   try {
     const { id } = req.headers;
     const { order } = req.body;
