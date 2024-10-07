@@ -1,10 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Sankofa+Display&display=swap');
 
-.creepy-font {
-    font-family: 'Sankofa Display', sans-serif;
-  }
 
   

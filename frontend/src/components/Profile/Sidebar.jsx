@@ -4,7 +4,7 @@ import { IoIosLogOut } from "react-icons/io";
 
 const Sidebar = ({ data }) => {
   return (
-    <div className="bg-zinc-800 p-4 rounded flex flex-col items-center justify-between h-full">
+    <div className="bg-zinc-800 p-4 rounded flex flex-col items-center justify-between h-auto lg:h-[100%]">
       <div className="flex items-center flex-col justify-center">
         <img src={data.avatar} className="h-24 w-24 rounded-full object-cover" alt="User Avatar" />
         <p className="mt-3 text-lg md:text-xl text-zinc-100 font-semibold">

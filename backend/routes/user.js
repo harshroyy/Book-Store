@@ -82,13 +82,17 @@ router.post("/sign-in", async (req, res) => {
 // Get user information
 router.get("/get-user-information", authenticateToken, async (req, res) => {
   try {
-    const { id } = req.headers.id;
+    const { id } = req.headers; 
     const data = await User.findById(id).select("-password");
+    if (!data) {
+      return res.status(404).json({ message: "User not found" });
+    }
     return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
 
 // Update address
 router.put("/update-address", authenticateToken, async (req, res) => {

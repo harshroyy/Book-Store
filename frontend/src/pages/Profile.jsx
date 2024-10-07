@@ -27,7 +27,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="bg-zinc-900 md:px-12 px-4 flex flex-col md:flex-row h-screen py-8 text-white">
+    <div className="bg-zinc-900 md:px-12 px-4 flex flex-col md:flex-row py-8 text-white">
       {!profile && (
         <div className="w-full h-full flex items-center justify-center">
           <Loader />
@@ -35,7 +35,7 @@ const Profile = () => {
       )}
       {profile && (
         <>
-          <div className="w-full md:w-1/4 lg:w-1/6 mb-4 md:mb-0">
+          <div className="w-full md:w-1/4 lg:w-1/6 mb-4 md:mb-0 h-auto lg:h-screen ">
             <Sidebar data={profile} />
           </div>
           <div className="flex-1 overflow-y-auto">
