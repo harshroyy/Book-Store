@@ -3,6 +3,7 @@ import Sidebar from "../components/Profile/Sidebar";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader/Loader";
+import MobileNav from "../components/Profile/MobileNav";
 
 const Profile = () => {
   const [profile, setProfile] = useState();
@@ -37,6 +38,7 @@ const Profile = () => {
         <>
           <div className="w-full md:w-1/4 lg:w-1/6 mb-4 md:mb-0 h-auto lg:h-screen ">
             <Sidebar data={profile} />
+            <MobileNav></MobileNav>
           </div>
           <div className="flex-1 overflow-y-auto">
             <Outlet />
